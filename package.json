@@ -1,0 +1,44 @@
+{
+  "name": "timsort",
+  "version": "0.1.0",
+  "author": {
+    "name": "Marco Ziccardi",
+    "url": "http://mziccard.me/"
+  },
+  "description": "TimSort: Fast Sorting for Node.js",
+  "homepage": "https://github.com/mziccard/node-timsort",
+  "main": "index.js",
+  "directories": {
+    "test": "./test",
+    "benchmark": "./benchmark"
+  },
+  "dependencies": {
+    "is": "~3.0.1"
+  },
+  "devDependencies": {
+    "mocha": "~2.2.5",
+    "assert": "~1.3.0",
+    "jshint": "~2.8.0"
+  },
+  "scripts": {
+    "test": "mocha --timeout 5000",
+    "lint": "jshint index.js test/*.js benchmark/index.js",
+    "benchmark": "node benchmark/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mziccard/node-timsort.git"
+  },
+  "keywords": [
+    "sort",
+    "compare",
+    "TimSort",
+    "algorithm",
+    "python",
+    "performance"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mziccard/node-timsort/issues"
+  }
+}
