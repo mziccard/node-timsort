@@ -429,17 +429,17 @@ TimSort.prototype.pushRun = function(runStart, runLength) {
 TimSort.prototype.mergeRuns = function() {
   while (this.stackSize > 1) {
     var n = this.stackSize - 2;
-    if (n > 0 &&
-      this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1]) {
+    if ((n >= 1 &&
+        this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1]) ||
+      (n >= 2 &&
+        this.runLength[n - 2] <= this.runLength[n] + this.runLength[n - 1])) {
       if (this.runLength[n - 1] < this.runLength[n + 1]) {
         n--;
       }
-      this.mergeAt(n);
-    } else if (this.runLength[n] <= this.runLength[n + 1]) {
-      this.mergeAt(n);
-    } else {
+    } else if (this.runLength[n] > this.runLength[n + 1]) {
       break;
     }
+    this.mergeAt(n);
   }
 };
 
@@ -463,7 +463,7 @@ TimSort.prototype.forceMergeRuns = function() {
  * @param {number} i - Index of the run to merge in TimSort's stack.
  */
 TimSort.prototype.mergeAt = function(i) {
-  
+
   var compare = this.compare;
   var array = this.array;
 
@@ -496,7 +496,7 @@ TimSort.prototype.mergeAt = function(i) {
    */
   length2 =
     gallopLeft(
-      array[start1 + length1 - 1], array, start2, length2, length2-1, compare);
+      array[start1 + length1 - 1], array, start2, length2, length2 - 1, compare);
   if (length2 === 0) {
     return;
   }
@@ -526,7 +526,7 @@ TimSort.prototype.mergeAt = function(i) {
  * @param {number} length2 - Length of run2.
  */
 TimSort.prototype.mergeLow = function(start1, length1, start2, length2) {
-  
+
   var compare = this.compare;
   var array = this.array;
   var tmp = this.tmp;
@@ -667,7 +667,7 @@ TimSort.prototype.mergeLow = function(start1, length1, start2, length2) {
  * @param {number} length2 - Length of run2.
  */
 TimSort.prototype.mergeHigh = function(start1, length1, start2, length2) {
-  
+
   var compare = this.compare;
   var array = this.array;
   var tmp = this.tmp;
