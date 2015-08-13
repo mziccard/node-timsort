@@ -1,0 +1,12 @@
+language: node_js
+matrix:
+  include:
+    - node_js: "0.12"
+    - node_js: "0.11"
+    - node_js: "0.10"
+    - node_js: "iojs"
+    - node_js: "iojs-v1.0.4" # earlier version of iojs
+
+script: "mocha -b test"
+
+sudo: false
