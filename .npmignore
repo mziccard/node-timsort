@@ -1,3 +1,13 @@
+# Development stuff
+test/
+Gruntfile.js
+
+# Configuration files
+.jscsrc
+.jshintrc
+.travis.yml
+bower.json
+
 # Logs
 logs
 *.log
@@ -27,6 +37,8 @@ node_modules
 # JetBrains exclusion
 .idea
 
-# TypeScript compiler notes
-.tscache
-.baseDir.*
+# Source files
+src
+
+# example files
+examples
