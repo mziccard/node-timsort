@@ -149,16 +149,18 @@
      * negative number if .toString() < b.toString(), 0 otherwise.
      */
     function alphabeticalCompare( a, b ) {
-        var aStr = String( a );
-        var bStr = String( b );
+        if( a === b ) {
+            return 0;
+        } else {
+            var aStr = String( a );
+            var bStr = String( b );
 
-        if( aStr < bStr ) {
-            return -1;
-        } else if( aStr > bStr ) {
-            return 1;
+            if( aStr === bStr ) {
+                return 0;
+            } else {
+                return aStr < bStr ? -1 : 1;
+            }
         }
-
-        return 0;
     }
 
     /**
