@@ -22,7 +22,6 @@
     "grunt-banner": "^0.5.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-uglify": "^0.9.1",
-    "jshint": "~2.8.0",
     "mocha": "~2.2.5"
   },
   "scripts": {
