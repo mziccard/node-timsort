@@ -7,6 +7,6 @@ matrix:
     - node_js: "iojs"
     - node_js: "iojs-v1.0.4" # earlier version of iojs
 
-script: "mocha -b test"
+script: "npm test"
 
 sudo: false
