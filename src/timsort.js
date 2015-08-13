@@ -26,7 +26,7 @@ const DEFAULT_TMP_STORAGE_LENGTH = 256;
  */
 export function sort( array, compare, lo, hi ) {
     if( !Array.isArray( array ) ) {
-        throw new Error( 'Can only sort arrays' );
+        throw new TypeError( 'Can only sort arrays' );
     }
 
     /*
