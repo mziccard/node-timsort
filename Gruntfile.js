@@ -1,13 +1,13 @@
 module.exports = function( grunt ) {
 
-    grunt.loadNpmTasks( "grunt-babel" );
-    grunt.loadNpmTasks( "grunt-contrib-clean" );
-    grunt.loadNpmTasks( "grunt-contrib-uglify" );
-    grunt.loadNpmTasks( "grunt-banner" );
+    grunt.loadNpmTasks( 'grunt-babel' );
+    grunt.loadNpmTasks( 'grunt-contrib-clean' );
+    grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+    grunt.loadNpmTasks( 'grunt-banner' );
 
-    var LICENSE = "/****\n * " +
-                  grunt.file.read( "./LICENSE.md", {encoding: "utf-8"} ).replace( /\n/ig, "\n * " ) +
-                  "\n ****/";
+    var LICENSE = '/****\n * ' +
+                  grunt.file.read( './LICENSE.md', {encoding: 'utf-8'} ).replace( /\n/ig, '\n * ' ) +
+                  '\n ****/';
 
     grunt.initConfig( {
         babel:     {
@@ -15,26 +15,26 @@ module.exports = function( grunt ) {
                 ast:          false,
                 sourceMaps:   false,
                 nonStandard:  false,
-                compact:      "false",
-                modules:      "umd",
-                moduleId:     "Timsort",
+                compact:      'false',
+                modules:      'umd',
+                moduleId:     'Timsort',
                 experimental: true
             },
             build:   {
                 options: {
-                    loose:    "all",
+                    loose:    'all',
                     optional: [
-                        "spec.undefinedToVoid",
-                        "minification.propertyLiterals",
-                        "es7.classProperties"
+                        'spec.undefinedToVoid',
+                        'minification.propertyLiterals',
+                        'es7.classProperties'
                     ]
                 },
                 files:   [
                     {
                         expand: true,
-                        cwd:    "./src/",
-                        src:    "./**/*.js",
-                        dest:   "./build/"
+                        cwd:    './src/',
+                        src:    './**/*.js',
+                        dest:   './build/'
                     }
                 ]
             }
@@ -42,30 +42,30 @@ module.exports = function( grunt ) {
         usebanner: {
             license: {
                 options: {
-                    position:  "top",
+                    position:  'top',
                     banner:    LICENSE,
                     linebreak: true
                 },
                 files:   {
-                    src: ["./build/**/*.js"]
+                    src: ['./build/**/*.js']
                 }
             }
         },
         clean:     {
             build: {
-                src: ["./build"]
+                src: ['./build']
             }
         },
         uglify:    {
             build: {
                 files: {
-                    "build/timsort.min.js": "build/timsort.js"
+                    'build/timsort.min.js': 'build/timsort.js'
                 }
             }
         }
     } );
 
-    grunt.registerTask( "build", ["clean:build", "babel:build", "usebanner:license", "uglify:build"] );
+    grunt.registerTask( 'build', ['clean:build', 'babel:build', 'usebanner:license', 'uglify:build'] );
 
-    grunt.registerTask( "default", ["build"] );
+    grunt.registerTask( 'default', ['build'] );
 };

@@ -15,85 +15,6 @@ const DEFAULT_MIN_GALLOPING = 7;
 const DEFAULT_TMP_STORAGE_LENGTH = 256;
 
 /**
- * Sort an array in the range [lo, hi) using TimSort.
- *
- * @param {array} array - The array to sort.
- * @param {function=} compare - Item comparison function. Default is
- *     alphabetical
- * @param {number} lo - First element in the range (inclusive).
- * @param {number} hi - Last element in the range.
- *     comparator.
- */
-export function sort( array, compare, lo, hi ) {
-    if( !Array.isArray( array ) ) {
-        throw new TypeError( 'Can only sort arrays' );
-    }
-
-    /*
-     * Handle the case where a comparison function is not provided. We do
-     * lexicographic sorting
-     */
-    if( !compare ) {
-        compare = alphabeticalCompare;
-
-    } else if( typeof compare !== 'function' ) {
-        hi = lo;
-        lo = compare;
-        compare = alphabeticalCompare;
-    }
-
-    if( !lo ) {
-        lo = 0;
-    }
-    if( !hi ) {
-        hi = array.length;
-    }
-
-    let remaining = hi - lo;
-
-    // The array is already sorted
-    if( remaining < 2 ) {
-        return;
-    }
-
-    let runLength = 0;
-    // On small arrays binary sort can be used directly
-    if( remaining < DEFAULT_MIN_MERGE ) {
-        runLength = makeAscendingRun( array, lo, hi, compare );
-        binaryInsertionSort( array, lo, hi, lo + runLength, compare );
-        return;
-    }
-
-    let ts = new TimSort( array, compare );
-
-    let minRun = minRunLength( remaining );
-
-    do {
-        runLength = makeAscendingRun( array, lo, hi, compare );
-        if( runLength < minRun ) {
-            let force = remaining;
-            if( force > minRun ) {
-                force = minRun;
-            }
-
-            binaryInsertionSort( array, lo, lo + force, lo + runLength, compare );
-            runLength = force;
-        }
-        // Push new run and merge if necessary
-        ts.pushRun( lo, runLength );
-        ts.mergeRuns();
-
-        // Go find next run
-        remaining -= runLength;
-        lo += runLength;
-
-    } while( remaining !== 0 );
-
-    // Force merging of remaining runs
-    ts.forceMergeRuns();
-}
-
-/**
  * Default alphabetical comparison of items.
  *
  * @param {string|object|number} a - First element to compare.
@@ -900,4 +821,83 @@ class TimSort {
             }
         }
     }
+}
+
+/**
+ * Sort an array in the range [lo, hi) using TimSort.
+ *
+ * @param {array} array - The array to sort.
+ * @param {function=} compare - Item comparison function. Default is
+ *     alphabetical
+ * @param {number} lo - First element in the range (inclusive).
+ * @param {number} hi - Last element in the range.
+ *     comparator.
+ */
+export function sort( array, compare, lo, hi ) {
+    if( !Array.isArray( array ) ) {
+        throw new TypeError( 'Can only sort arrays' );
+    }
+
+    /*
+     * Handle the case where a comparison function is not provided. We do
+     * lexicographic sorting
+     */
+    if( !compare ) {
+        compare = alphabeticalCompare;
+
+    } else if( typeof compare !== 'function' ) {
+        hi = lo;
+        lo = compare;
+        compare = alphabeticalCompare;
+    }
+
+    if( !lo ) {
+        lo = 0;
+    }
+    if( !hi ) {
+        hi = array.length;
+    }
+
+    let remaining = hi - lo;
+
+    // The array is already sorted
+    if( remaining < 2 ) {
+        return;
+    }
+
+    let runLength = 0;
+    // On small arrays binary sort can be used directly
+    if( remaining < DEFAULT_MIN_MERGE ) {
+        runLength = makeAscendingRun( array, lo, hi, compare );
+        binaryInsertionSort( array, lo, hi, lo + runLength, compare );
+        return;
+    }
+
+    let ts = new TimSort( array, compare );
+
+    let minRun = minRunLength( remaining );
+
+    do {
+        runLength = makeAscendingRun( array, lo, hi, compare );
+        if( runLength < minRun ) {
+            let force = remaining;
+            if( force > minRun ) {
+                force = minRun;
+            }
+
+            binaryInsertionSort( array, lo, lo + force, lo + runLength, compare );
+            runLength = force;
+        }
+        // Push new run and merge if necessary
+        ts.pushRun( lo, runLength );
+        ts.mergeRuns();
+
+        // Go find next run
+        remaining -= runLength;
+        lo += runLength;
+
+    } while( remaining !== 0 );
+
+    // Force merging of remaining runs
+    ts.forceMergeRuns();
 }
