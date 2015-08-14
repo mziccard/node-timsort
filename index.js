@@ -1,1 +1,1 @@
-module.exports = require( './build/timsort.js' );
+module.exports = require('./build/timsort.js');
