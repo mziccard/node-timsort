@@ -35,9 +35,6 @@
     global.timsort = mod.exports;
   }
 })(this, function (exports) {
-  /**
-   * Default minimum size of a run.
-   */
   'use strict';
 
   exports.__esModule = true;
@@ -51,25 +48,10 @@
 
   var DEFAULT_MIN_MERGE = 32;
 
-  /**
-   * Minimum ordered subsequece required to do galloping.
-   */
   var DEFAULT_MIN_GALLOPING = 7;
 
-  /**
-   * Default tmp storage length. Can increase depending on the size of the
-   * smallest run to merge.
-   */
   var DEFAULT_TMP_STORAGE_LENGTH = 256;
 
-  /**
-   * Default alphabetical comparison of items.
-   *
-   * @param {string|object|number} a - First element to compare.
-   * @param {string|object|number} b - Second element to compare.
-   * @return {number} - A positive number if a.toString() > b.toString(), a
-   * negative number if .toString() < b.toString(), 0 otherwise.
-   */
   function alphabeticalCompare(a, b) {
     if (a === b) {
       return 0;
@@ -85,11 +67,6 @@
     }
   }
 
-  /**
-   * Compute minimum run length for TimSort
-   *
-   * @param {number} n - The size of the array to sort.
-   */
   function minRunLength(n) {
     var r = 0;
 
@@ -101,17 +78,6 @@
     return n + r;
   }
 
-  /**
-   * Counts the length of a monotonically ascending or strictly monotonically
-   * descending sequence (run) starting at array[lo] in the range [lo, hi). If
-   * the run is descending it is made ascending.
-   *
-   * @param {array} array - The array to reverse.
-   * @param {number} lo - First element in the range (inclusive).
-   * @param {number} hi - Last element in the range.
-   * @param {function} compare - Item comparison function.
-   * @return {number} - The length of the run.
-   */
   function makeAscendingRun(array, lo, hi, compare) {
     var runHi = lo + 1;
 
@@ -119,14 +85,12 @@
       return 1;
     }
 
-    // Descending
     if (compare(array[runHi++], array[lo]) < 0) {
       while (runHi < hi && compare(array[runHi], array[runHi - 1]) < 0) {
         runHi++;
       }
 
       reverseRun(array, lo, runHi);
-      // Ascending
     } else {
       while (runHi < hi && compare(array[runHi], array[runHi - 1]) >= 0) {
         runHi++;
@@ -136,13 +100,6 @@
     return runHi - lo;
   }
 
-  /**
-   * Reverse an array in the range [lo, hi).
-   *
-   * @param {array} array - The array to reverse.
-   * @param {number} lo - First element in the range (inclusive).
-   * @param {number} hi - Last element in the range.
-   */
   function reverseRun(array, lo, hi) {
     hi--;
 
@@ -153,16 +110,6 @@
     }
   }
 
-  /**
-   * Perform the binary sort of the array in the range [lo, hi) where start is
-   * the first element possibly out of order.
-   *
-   * @param {array} array - The array to sort.
-   * @param {number} lo - First element in the range (inclusive).
-   * @param {number} hi - Last element in the range.
-   * @param {number} start - First element possibly out of order.
-   * @param {function} compare - Item comparison function.
-   */
   function binaryInsertionSort(array, lo, hi, start, compare) {
     if (start === lo) {
       start++;
@@ -171,14 +118,9 @@
     for (; start < hi; start++) {
       var pivot = array[start];
 
-      // Ranges of the array where pivot belongs
       var left = lo;
       var right = start;
 
-      /*
-       *   pivot >= array[i] for i in [lo, left)
-       *   pivot <  array[i] for i in  in [right, start)
-       */
       while (left < right) {
         var mid = left + right >>> 1;
 
@@ -189,20 +131,15 @@
         }
       }
 
-      /*
-       * Move elements right to make room for the pivot. If there are elements
-       * equal to pivot, left points to the first slot after them: this is also
-       * a reason for which TimSort is stable
-       */
       var n = start - left;
-      // Switch is just an optimization for small arrays
+
       switch (n) {
         case 3:
           array[left + 3] = array[left + 2];
-        /* falls through */
+
         case 2:
           array[left + 2] = array[left + 1];
-        /* falls through */
+
         case 1:
           array[left + 1] = array[left];
           break;
@@ -217,19 +154,6 @@
     }
   }
 
-  /**
-   * Find the position at which to insert a value in a sorted range. If the range
-   * contains elements equal to the value the leftmost element index is returned
-   * (for stability).
-   *
-   * @param {number} value - Value to insert.
-   * @param {array} array - The array in which to insert value.
-   * @param {number} start - First element in the range.
-   * @param {number} length - Length of the range.
-   * @param {number} hint - The index at which to begin the search.
-   * @param {function} compare - Item comparison function.
-   * @return {number} - The index where to insert value.
-   */
   function gallopLeft(value, array, start, length, hint, compare) {
     var lastOffset = 0;
     var maxOffset = 0;
@@ -251,11 +175,8 @@
         offset = maxOffset;
       }
 
-      // Make offsets relative to start
       lastOffset += hint;
       offset += hint;
-
-      // value <= array[start + hint]
     } else {
       maxOffset = hint + 1;
       while (offset < maxOffset && compare(value, array[start + hint - offset]) <= 0) {
@@ -270,18 +191,11 @@
         offset = maxOffset;
       }
 
-      // Make offsets relative to start
       var tmp = lastOffset;
       lastOffset = hint - offset;
       offset = hint - tmp;
     }
 
-    /*
-     * Now array[start+lastOffset] < value <= array[start+offset], so value
-     * belongs somewhere in the range (start + lastOffset, start + offset]. Do a
-     * binary search, with invariant array[start + lastOffset - 1] < value <=
-     * array[start + offset].
-     */
     lastOffset++;
     while (lastOffset < offset) {
       var m = lastOffset + (offset - lastOffset >>> 1);
@@ -295,19 +209,6 @@
     return offset;
   }
 
-  /**
-   * Find the position at which to insert a value in a sorted range. If the range
-   * contains elements equal to the value the rightmost element index is returned
-   * (for stability).
-   *
-   * @param {number} value - Value to insert.
-   * @param {array} array - The array in which to insert value.
-   * @param {number} start - First element in the range.
-   * @param {number} length - Length of the range.
-   * @param {number} hint - The index at which to begin the search.
-   * @param {function} compare - Item comparison function.
-   * @return {number} - The index where to insert value.
-   */
   function gallopRight(value, array, start, length, hint, compare) {
     var lastOffset = 0;
     var maxOffset = 0;
@@ -329,12 +230,9 @@
         offset = maxOffset;
       }
 
-      // Make offsets relative to start
       var tmp = lastOffset;
       lastOffset = hint - offset;
       offset = hint - tmp;
-
-      // value >= array[start + hint]
     } else {
       maxOffset = length - hint;
 
@@ -351,17 +249,10 @@
         offset = maxOffset;
       }
 
-      // Make offsets relative to start
       lastOffset += hint;
       offset += hint;
     }
 
-    /*
-     * Now array[start+lastOffset] < value <= array[start+offset], so value
-     * belongs somewhere in the range (start + lastOffset, start + offset]. Do a
-     * binary search, with invariant array[start + lastOffset - 1] < value <=
-     * array[start + offset].
-     */
     lastOffset++;
 
     while (lastOffset < offset) {
@@ -408,35 +299,11 @@
       this.runLength = new Array(this.stackLength);
     }
 
-    /**
-     * Sort an array in the range [lo, hi) using TimSort.
-     *
-     * @param {array} array - The array to sort.
-     * @param {function=} compare - Item comparison function. Default is
-     *     alphabetical
-     * @param {number} lo - First element in the range (inclusive).
-     * @param {number} hi - Last element in the range.
-     *     comparator.
-     */
-
-    /**
-     * Push a new run on TimSort's stack.
-     *
-     * @param {number} runStart - Start index of the run in the original array.
-     * @param {number} runLength - Length of the run;
-     */
-
     TimSort.prototype.pushRun = function pushRun(runStart, runLength) {
       this.runStart[this.stackSize] = runStart;
       this.runLength[this.stackSize] = runLength;
       this.stackSize += 1;
     };
-
-    /**
-     * Merge runs on TimSort's stack so that the following holds for all i:
-     * 1) runLength[i - 3] > runLength[i - 2] + runLength[i - 1]
-     * 2) runLength[i - 2] > runLength[i - 1]
-     */
 
     TimSort.prototype.mergeRuns = function mergeRuns() {
       while (this.stackSize > 1) {
@@ -454,10 +321,6 @@
       }
     };
 
-    /**
-     * Merge all runs on TimSort's stack until only one remains.
-     */
-
     TimSort.prototype.forceMergeRuns = function forceMergeRuns() {
       while (this.stackSize > 1) {
         var n = this.stackSize - 2;
@@ -469,13 +332,6 @@
         this.mergeAt(n);
       }
     };
-
-    /**
-     * Merge the runs on the stack at positions i and i+1. Must be always be called
-     * with i=stackSize-2 or i=stackSize-3 (that is, we merge on top of the stack).
-     *
-     * @param {number} i - Index of the run to merge in TimSort's stack.
-     */
 
     TimSort.prototype.mergeAt = function mergeAt(i) {
       var compare = this.compare;
@@ -495,10 +351,6 @@
 
       this.stackSize--;
 
-      /*
-       * Find where the first element in the second run goes in run1. Previous
-       * elements in run1 are already in place
-       */
       var k = gallopRight(array[start2], array, start1, length1, 0, compare);
       start1 += k;
       length1 -= k;
@@ -507,40 +359,18 @@
         return;
       }
 
-      /*
-       * Find where the last element in the first run goes in run2. Next elements
-       * in run2 are already in place
-       */
       length2 = gallopLeft(array[start1 + length1 - 1], array, start2, length2, length2 - 1, compare);
 
       if (length2 === 0) {
         return;
       }
 
-      /*
-       * Merge remaining runs. A tmp array with length = min(length1, length2) is
-       * used
-       */
       if (length1 <= length2) {
         this.mergeLow(start1, length1, start2, length2);
       } else {
         this.mergeHigh(start1, length1, start2, length2);
       }
     };
-
-    /**
-     * Merge two adjacent runs in a stable way. The runs must be such that the
-     * first element of run1 is bigger than the first element in run2 and the
-     * last element of run1 is greater than all the elements in run2.
-     * The method should be called when run1.length <= run2.length as it uses
-     * TimSort temporary array to store run1. Use mergeHigh if run1.length >
-     * run2.length.
-     *
-     * @param {number} start1 - First element in run1.
-     * @param {number} length1 - Length of run1.
-     * @param {number} start2 - First element in run2.
-     * @param {number} length2 - Length of run2.
-     */
 
     TimSort.prototype.mergeLow = function mergeLow(start1, length1, start2, length2) {
 
@@ -686,20 +516,6 @@
         }
       }
     };
-
-    /**
-     * Merge two adjacent runs in a stable way. The runs must be such that the
-     * first element of run1 is bigger than the first element in run2 and the
-     * last element of run1 is greater than all the elements in run2.
-     * The method should be called when run1.length > run2.length as it uses
-     * TimSort temporary array to store run2. Use mergeLow if run1.length <=
-     * run2.length.
-     *
-     * @param {number} start1 - First element in run1.
-     * @param {number} length1 - Length of run1.
-     * @param {number} start2 - First element in run2.
-     * @param {number} length2 - Length of run2.
-     */
 
     TimSort.prototype.mergeHigh = function mergeHigh(start1, length1, start2, length2) {
       var compare = this.compare;
@@ -876,10 +692,6 @@
       throw new TypeError('Can only sort arrays');
     }
 
-    /*
-     * Handle the case where a comparison function is not provided. We do
-     * lexicographic sorting
-     */
     if (!compare) {
       compare = alphabeticalCompare;
     } else if (typeof compare !== 'function') {
@@ -897,13 +709,12 @@
 
     var remaining = hi - lo;
 
-    // The array is already sorted
     if (remaining < 2) {
       return;
     }
 
     var runLength = 0;
-    // On small arrays binary sort can be used directly
+
     if (remaining < DEFAULT_MIN_MERGE) {
       runLength = makeAscendingRun(array, lo, hi, compare);
       binaryInsertionSort(array, lo, hi, lo + runLength, compare);
@@ -925,16 +736,14 @@
         binaryInsertionSort(array, lo, lo + force, lo + runLength, compare);
         runLength = force;
       }
-      // Push new run and merge if necessary
+
       ts.pushRun(lo, runLength);
       ts.mergeRuns();
 
-      // Go find next run
       remaining -= runLength;
       lo += runLength;
     } while (remaining !== 0);
 
-    // Force merging of remaining runs
     ts.forceMergeRuns();
   }
 });

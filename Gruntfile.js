@@ -16,6 +16,7 @@ module.exports = function (grunt) {
         sourceMaps: false,
         nonStandard: false,
         compact: 'false',
+        comments: false,
         modules: 'umd',
         moduleId: 'timsort',
         experimental: true
