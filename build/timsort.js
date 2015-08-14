@@ -24,7 +24,7 @@
  ****/
 (function (global, factory) {
   if (typeof define === 'function' && define.amd) {
-    define('Timsort', ['exports'], factory);
+    define('timsort', ['exports'], factory);
   } else if (typeof exports !== 'undefined') {
     factory(exports);
   } else {
@@ -32,7 +32,7 @@
       exports: {}
     };
     factory(mod.exports);
-    global.Timsort = mod.exports;
+    global.timsort = mod.exports;
   }
 })(this, function (exports) {
   /**
@@ -442,12 +442,7 @@
       while (this.stackSize > 1) {
         var n = this.stackSize - 2;
 
-        if (n >= 1 && this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1] || n >= 2
-          && this.runLength[n
-          - 2]
-          <= this.runLength[n]
-          + this.runLength[n
-          - 1]) {
+        if (n >= 1 && this.runLength[n - 1] <= this.runLength[n] + this.runLength[n + 1] || n >= 2 && this.runLength[n - 2] <= this.runLength[n] + this.runLength[n - 1]) {
 
           if (this.runLength[n - 1] < this.runLength[n + 1]) {
             n--;

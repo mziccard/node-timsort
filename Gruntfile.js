@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         nonStandard: false,
         compact: 'false',
         modules: 'umd',
-        moduleId: 'Timsort',
+        moduleId: 'timsort',
         experimental: true
       },
       build: {
