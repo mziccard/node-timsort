@@ -12,10 +12,10 @@ function numberCompare(a, b) {
   return a - b;
 }
 
-describe('Sort a Random Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort a Random Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.randomInt(length);
         var arr2 = arr1.slice();
@@ -30,10 +30,10 @@ describe('Sort a Random Array', function() {
   });
 });
 
-describe('Sort a Descending Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort a Descending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.descendingInt(length);
         var arr2 = arr1.slice();
@@ -48,10 +48,10 @@ describe('Sort a Descending Array', function() {
   });
 });
 
-describe('Sort an Ascending Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Ascending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.ascendingInt(length);
         var arr2 = arr1.slice();
@@ -66,10 +66,10 @@ describe('Sort an Ascending Array', function() {
   });
 });
 
-describe('Sort an Ascending Array with 3 Random Exchanges', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Ascending Array with 3 Random Exchanges', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.ascending3RandomExchangesInt(length);
         var arr2 = arr1.slice();
@@ -84,10 +84,10 @@ describe('Sort an Ascending Array with 3 Random Exchanges', function() {
   });
 });
 
-describe('Sort an Ascending Array with 10 Random Elements at Last', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Ascending Array with 10 Random Elements at Last', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.ascending10RandomEndInt(length);
         var arr2 = arr1.slice();
@@ -102,10 +102,10 @@ describe('Sort an Ascending Array with 10 Random Elements at Last', function() {
   });
 });
 
-describe('Sort an Array of all Equal Elements', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Array of all Equal Elements', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.allEqualInt(length);
         var arr2 = arr1.slice();
@@ -120,10 +120,10 @@ describe('Sort an Array of all Equal Elements', function() {
   });
 });
 
-describe('Sort an Array with Many Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Array with Many Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.manyDuplicateInt(length);
         var arr2 = arr1.slice();
@@ -138,10 +138,10 @@ describe('Sort an Array with Many Duplicates', function() {
   });
 });
 
-describe('Sort an Array with Some Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Sort an Array with Some Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.someDuplicateInt(length);
         var arr2 = arr1.slice();
@@ -156,10 +156,10 @@ describe('Sort an Array with Some Duplicates', function() {
   });
 });
 
-describe('Sort Subrange of a Random Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of a Random Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -180,10 +180,10 @@ describe('Sort Subrange of a Random Array', function() {
   });
 });
 
-describe('Sort Subrange of a Descending Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of a Descending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -204,10 +204,10 @@ describe('Sort Subrange of a Descending Array', function() {
   });
 });
 
-describe('Sort Subrange of an Ascending Array', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of an Ascending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -230,10 +230,10 @@ describe('Sort Subrange of an Ascending Array', function() {
 
 describe(
   'Sort Subrange of an Ascending Array with 3 Random Exchanges',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -256,10 +256,10 @@ describe(
 
 describe(
   'Sort Subrange of an Ascending Array with 10 Random Elements at Last',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -280,10 +280,10 @@ describe(
     });
   });
 
-describe('Sort Subrange of an Array of all Equal Elements', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of an Array of all Equal Elements', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -304,10 +304,10 @@ describe('Sort Subrange of an Array of all Equal Elements', function() {
   });
 });
 
-describe('Sort Subrange of an Array with Many Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of an Array with Many Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -328,10 +328,10 @@ describe('Sort Subrange of an Array with Many Duplicates', function() {
   });
 });
 
-describe('Sort Subrange of an Array with Some Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Sort Subrange of an Array with Some Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -352,10 +352,10 @@ describe('Sort Subrange of an Array with Some Duplicates', function() {
   });
 });
 
-describe('Lexicographically Sort a Random Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort a Random Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.randomInt(length);
         var arr2 = arr1.slice();
@@ -370,10 +370,10 @@ describe('Lexicographically Sort a Random Array', function() {
   });
 });
 
-describe('Lexicographically Sort a Descending Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort a Descending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.descendingInt(length);
         var arr2 = arr1.slice();
@@ -388,10 +388,10 @@ describe('Lexicographically Sort a Descending Array', function() {
   });
 });
 
-describe('Lexicographically Sort an Ascending Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort an Ascending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.ascendingInt(length);
         var arr2 = arr1.slice();
@@ -408,10 +408,10 @@ describe('Lexicographically Sort an Ascending Array', function() {
 
 describe(
   'Lexicographically Sort an Ascending Array with 3 Random Exchanges',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var arr1 = ArrayGenerator.ascending3RandomExchangesInt(length);
           var arr2 = arr1.slice();
@@ -428,10 +428,10 @@ describe(
 
 describe(
   'Lexicographically Sort an Ascending Array with 10 Random Elements at Last',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var arr1 = ArrayGenerator.ascending10RandomEndInt(length);
           var arr2 = arr1.slice();
@@ -446,10 +446,10 @@ describe(
     });
   });
 
-describe('Lexicographically Sort an Array of all Equal Elements', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort an Array of all Equal Elements', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.allEqualInt(length);
         var arr2 = arr1.slice();
@@ -464,10 +464,10 @@ describe('Lexicographically Sort an Array of all Equal Elements', function() {
   });
 });
 
-describe('Lexicographically Sort an Array with Many Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort an Array with Many Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.manyDuplicateInt(length);
         var arr2 = arr1.slice();
@@ -482,10 +482,10 @@ describe('Lexicographically Sort an Array with Many Duplicates', function() {
   });
 });
 
-describe('Lexicographically Sort an Array with Some Duplicates', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort an Array with Some Duplicates', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var arr1 = ArrayGenerator.someDuplicateInt(length);
         var arr2 = arr1.slice();
@@ -500,10 +500,10 @@ describe('Lexicographically Sort an Array with Some Duplicates', function() {
   });
 });
 
-describe('Lexicographically Sort Subrange of a Random Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort Subrange of a Random Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -524,10 +524,10 @@ describe('Lexicographically Sort Subrange of a Random Array', function() {
   });
 });
 
-describe('Lexicographically Sort Subrange of a Descending Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort Subrange of a Descending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -548,10 +548,10 @@ describe('Lexicographically Sort Subrange of a Descending Array', function() {
   });
 });
 
-describe('Lexicographically Sort Subrange of an Ascending Array', function() {
-  lengths.forEach(function(length) {
+describe('Lexicographically Sort Subrange of an Ascending Array', function () {
+  lengths.forEach(function (length) {
 
-    it('Should sort a size ' + length + ' array', function() {
+    it('Should sort a size ' + length + ' array', function () {
       for (var i = 0; i < repetitions; i++) {
         var lo = parseInt(length / 4);
         var hi = length - lo;
@@ -575,10 +575,10 @@ describe('Lexicographically Sort Subrange of an Ascending Array', function() {
 describe(
   'Lexicographically Sort Subrange of an Ascending ' +
   'Array with 3 Random Exchanges',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -602,10 +602,10 @@ describe(
 describe(
   'Lexicographically Sort Subrange of an Ascending Array ' +
   'with 10 Random Elements at Last',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -628,10 +628,10 @@ describe(
 
 describe(
   'Lexicographically Sort Subrange of an Array of all Equal Elements',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -654,10 +654,10 @@ describe(
 
 describe(
   'Lexicographically Sort Subrange of an Array with Many Duplicates',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
@@ -680,10 +680,10 @@ describe(
 
 describe(
   'Lexicographically Sort Subrange of an Array with Some Duplicates',
-  function() {
-    lengths.forEach(function(length) {
+  function () {
+    lengths.forEach(function (length) {
 
-      it('Should sort a size ' + length + ' array', function() {
+      it('Should sort a size ' + length + ' array', function () {
         for (var i = 0; i < repetitions; i++) {
           var lo = parseInt(length / 4);
           var hi = length - lo;
