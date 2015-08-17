@@ -33,7 +33,7 @@ var timsortResults = {};
 
 var printer = new PrettyPrinter();
 printer.addAt('ArrayType', 0);
-printer.addAt('Array', 30);
+printer.addAt('Length', 30);
 printer.addAt('TimSort', 37);
 printer.addAt('array.sort', 47);
 printer.addAt('Speedup', 59);
