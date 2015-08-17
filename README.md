@@ -95,7 +95,8 @@ results are very similar), obtaining the following values:
   <td rowspan="4">Descending</td><td>10</td><td>642</td><td>2414</td><td>3.76</td>
  </tr>
  <tr>
-  <td>100</td><td>1747</td><td>20710</td><td>11.85</td>/tr>
+  <td>100</td><td>1747</td><td>20710</td><td>11.85</td>
+</tr>
  <tr>
   <td>1000</td><td>8053</td><td>351682</td><td>43.67</td>
  </tr>
