@@ -1,5 +1,8 @@
 # Node-TimSort: Fast Sorting for Node.js
 
+[![Build Status](https://travis-ci.org/mziccard/node-timsort.svg?branch=master)](https://travis-ci.org/mziccard/node-timsort)
+[![npm version](https://badge.fury.io/js/timsort.svg)](https://www.npmjs.com/package/timsort)
+
 An adaptive and **stable** sort algorithm based on merging that requires fewer than nlog(n) 
 comparisons when run on partially sorted arrays. The algorithm uses O(n) memory and still runs in O(nlogn) 
 (worst case) on random arrays.  
@@ -10,7 +13,7 @@ TimSort has been also adopted in Java starting from version 7.
 
 ## Usage
 
-Install the package:
+Install the package with npm:
 ```
 npm install --save timsort
 ```
@@ -21,6 +24,7 @@ var TimSort = require('timsort');
 var arr = [...];
 TimSort.sort(arr);
 ```
+Thanks to [@novacrazy](https://github.com/novacrazy)
 As `array.sort()` by default the `timsort` module sorts according to 
 lexicographical order. 
 You can also provide your own compare function (to sort any object) as:
@@ -72,110 +76,102 @@ results are very similar), obtaining the following values:
     <th>array.sort</th>
   </tr>
 <tbody>
-<tr>
-  <td rowspan="4">Random</td>
-  <td>10</td><td>2374</td><td>4256</td><td>1.79</td>
-</tr>
-<tr>
-  <td>100</td><td>12709</td><td>45903</td><td>3.61</td>
-</tr>
-<tr>
-  <td>1000</td><td>134876</td><td>479581</td><td>3.56</td>
-</tr>
-<tr>
-  <td>10000</td><td>1724563</td><td>6485514</td><td>3.76</td>
-</tr>
-<tr>
-  <td rowspan="4">Descending</td>
-  <td>10</td><td>1637</td><td>2869</td><td>1.75</td>
-</tr>
-<tr>
-  <td>100</td><td>2631</td><td>21267</td><td>8.08</td>
-</tr>
-<tr>
-  <td>1000</td><td>9330</td><td>352918</td><td>37.83</td>
-</tr>
-<tr>
-  <td>10000</td><td>74009</td><td>5114658</td><td>69.11</td>
-</tr>
-<tr>
-  <td rowspan="4">Ascending</td>
-  <td>10</td><td>1654</td><td>1751</td><td>1.06</td>
-</tr>
-<tr>
-  <td>100</td><td>2596</td><td>20159</td><td>7.77</td>
-</tr>
-<tr>
-  <td>1000</td><td>8253</td><td>340309</td><td>41.23</td>
-</tr>
-<tr>
-  <td>10000</td><td>60613</td><td>5045549</td><td>83.24</td>
-</tr>
-<tr>
-  <td rowspan="4">Ascending + 3 Rand Exc</td>
-  <td>10</td><td>1815</td><td>1981</td><td>1.09</td>
-</tr>
-<tr>
-  <td>100</td><td>4126</td><td>20564</td><td>4.98</td>
-</tr>
-<tr>
-  <td>1000</td><td>11490</td><td>342398</td><td>29.80</td>
-</tr>
-<tr>
-  <td>10000</td><td>85632</td><td>5062110</td><td>59.11</td>
-</tr>
-<tr>
-  <td rowspan="4">Ascending + 10 Rand End</td>
-  <td>10</td><td>2001</td><td>2410</td><td>1.20</td>
-</tr>
-<tr>
-  <td>100</td><td>6106</td><td>23537</td><td>3.85</td>
-</tr>
-<tr>
-  <td>1000</td><td>17195</td><td>337073</td><td>19.60</td>
-</tr>
-<tr>
-  <td>10000</td><td>99977</td><td>4868866</td><td>48.70</td>
-</tr>
-<tr>
-  <td rowspan="4">Equal Elements</td>
-  <td>10</td><td>1581</td><td>1710</td><td>1.08</td>
-</tr>
-<tr>
-  <td>100</td><td>2492</td><td>4562</td><td>1.83</td>
-</tr>
-<tr>
-  <td>1000</td><td>7337</td><td>31360</td><td>4.27</td>
-</tr>
-<tr>
-  <td>10000</td><td>50090</td><td>311882</td><td>6.23</td>
-</tr>
-<tr>
-  <td rowspan="4">Many Repetitions</td>
-  <td>10</td><td>1966</td><td>2415</td><td>1.23</td>
-</tr>
-<tr>
-  <td>100</td><td>15115</td><td>25965</td><td>1.72</td>
-</tr>
-<tr>
-  <td>1000</td><td>182287</td><td>372412</td><td>2.04</td>
-</tr>
-<tr>
-  <td>10000</td><td>2382618</td><td>5317724</td><td>2.23</td>
-</tr>
-<tr>
-  <td rowspan="4">Some Repetitions</td>
-  <td>10</td><td>1994</td><td>2549</td><td>1.28</td>
-</tr>
-<tr>
-  <td>100</td><td>14432</td><td>25101</td><td>1.74</td>
-</tr>
-<tr>
-  <td>1000</td><td>181708</td><td>364835</td><td>2</td>
-</tr>
-<tr>
-  <td>10000</td><td>2351346</td><td>5149683</td><td>2.19</td>
-</tr>
+ <tr>
+  <td rowspan="4">Random</td><td>10</td><td>958</td><td>4195</td><td>4.38</td>
+ </tr>
+ <tr>
+  <td>100</td><td>10969</td><td>49656</td><td>4.53</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>146410</td><td>540254</td><td>3.69</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>1754770</td><td>6143806</td><td>3.50</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Descending</td><td>10</td><td>642</td><td>2414</td><td>3.76</td>
+ </tr>
+ <tr>
+  <td>100</td><td>1747</td><td>20710</td><td>11.85</td>/tr>
+ <tr>
+  <td>1000</td><td>8053</td><td>351682</td><td>43.67</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>69162</td><td>5106434</td><td>73.83</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Ascending</td><td>10</td><td>706</td><td>1471</td><td>2.08</td>
+ </tr>
+ <tr>
+  <td>100</td><td>1712</td><td>20289</td><td>11.85</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>8498</td><td>369125</td><td>43.43</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>59206</td><td>5333314</td><td>90.08</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Ascending + 3 Rand Exc</td> <td>10</td> <td>918</td> <td>1886</td> <td>2.05</td>
+ </tr>
+ <tr>
+  <td>100</td> <td>3316</td> <td>21581</td> <td>6.51</td>
+ </tr>
+ <tr>
+  <td>1000</td> <td>11432</td> <td>380742</td> <td>33.30</td>
+ </tr>
+ <tr>
+  <td>10000</td> <td>83981</td> <td>5293251</td> <td>63.03</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Ascending + 10 Rand End</td><td>10</td><td>1037</td><td>2154</td><td>2.08</td>
+ </tr>
+ <tr>
+  <td>100</td><td>4779</td><td>22658</td><td>4.74</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>16608</td><td>352633</td><td>21.23</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>102818</td><td>5225330</td><td>50.82</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Equal Elements</td><td>10</td><td>740</td><td>1473</td><td>1.99</td>
+ </tr>
+ <tr>
+  <td>100</td><td>1768</td><td>4576</td><td>2.59</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>6934</td><td>33676</td><td>4.86</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>57586</td><td>338154</td><td>5.87</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Many Repetitions</td><td>10</td><td>1044</td><td>2110</td><td>2.02</td>
+ </tr>
+ <tr>
+  <td>100</td><td>12506</td><td>23391</td><td>1.87</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>184184</td><td>386896</td><td>2.10</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>2647209</td><td>5798097</td><td>2.19</td>
+ </tr>
+ <tr>
+  <td rowspan="4">Some Repetitions</td><td>10</td><td>1075</td><td>2183</td><td>2.03</td>
+ </tr>
+ <tr>
+  <td>100</td><td>12787</td><td>23654</td><td>1.85</td>
+ </tr>
+ <tr>
+  <td>1000</td><td>177727</td><td>362135</td><td>2.04</td>
+ </tr>
+ <tr>
+  <td>10000</td><td>2332444</td><td>5059351</td><td>2.17</td>
+ </tr>
+</tbody>
 </table>
 
 `TimSort.sort` **is faster** than `array.sort` on any of the tested array types. 
