@@ -39,7 +39,7 @@ node_modules
 .idea
 
 # Source files
-src
+# src
 
 # example files
 examples
