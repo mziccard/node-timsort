@@ -24,7 +24,10 @@ var TimSort = require('timsort');
 var arr = [...];
 TimSort.sort(arr);
 ```
-Thanks to [@novacrazy](https://github.com/novacrazy)
+Thanks to [@novacrazy](https://github.com/novacrazy) you can also install the package with bower by running:
+```
+bower install timsort
+```
 As `array.sort()` by default the `timsort` module sorts according to 
 lexicographical order. 
 You can also provide your own compare function (to sort any object) as:
