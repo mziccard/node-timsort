@@ -1,9 +1,37 @@
 {
-  "name":         "timsort",
-  "version":      "0.1.1",
-  "main":         "./build/timsort.js",
-  "ignore":       [
-    "test/**"
+  "name": "timsort",
+  "version": "0.2.0",
+  "author": {
+    "name": "Marco Ziccardi",
+    "url": "http://mziccard.me/"
+  },
+  "description": "TimSort: Fast Sorting for Node.js",
+  "homepage": "https://github.com/mziccard/node-timsort",
+  "main": "./build/timsort.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mziccard/node-timsort.git"
+  },
+  "keywords": [
+    "sort",
+    "compare",
+    "TimSort",
+    "algorithm",
+    "python",
+    "performance"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "benchmark",
+    "coverage",
+    "node_modules",
+    "test",
+    ".eslintrc",
+    ".travis.yml",
+    "Gruntile.js",
+    "package.json",
+    ".git",
+    ".gitignore"
   ],
   "dependencies": {}
 }
