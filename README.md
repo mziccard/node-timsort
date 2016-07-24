@@ -11,6 +11,11 @@ This implementation is based on the original
 by Tim Peters for Python's lists (code [here](http://svn.python.org/projects/python/trunk/Objects/listobject.c)).
 TimSort has been also adopted in Java starting from version 7.
 
+## Acknowledgments
+
+- @novacrazy: ported the module to ES6/ES7 and made it available via bower
+- @kasperisager: implemented faster lexicographic comparison of small integers
+
 ## Usage
 
 Install the package with npm:
@@ -24,7 +29,7 @@ var TimSort = require('timsort');
 var arr = [...];
 TimSort.sort(arr);
 ```
-Thanks to [@novacrazy](https://github.com/novacrazy) you can also install the package with bower by running:
+You can also install it with bower:
 ```
 bower install timsort
 ```
@@ -63,7 +68,7 @@ the default `array.sort` method in the numerical sorting of different types of i
 
 For any of the array types the sorting is repeated several times and for 
 different array sizes, average execution time is then printed. 
-I run the benchmark on Node v0.12.7 (both pre-compiled and compiled from source, 
+I run the benchmark on Node v6.3.1 (both pre-compiled and compiled from source,
 results are very similar), obtaining the following values:
 
 <table>
@@ -80,107 +85,107 @@ results are very similar), obtaining the following values:
   </tr>
 <tbody>
  <tr>
-  <td rowspan="4">Random</td><td>10</td><td>958</td><td>4195</td><td>4.38</td>
+  <td rowspan="4">Random</td><td>10</td><td>404</td><td>1583</td><td>3.91</td>
  </tr>
  <tr>
-  <td>100</td><td>10969</td><td>49656</td><td>4.53</td>
+  <td>100</td><td>7147</td><td>4442</td><td>0.62</td>
  </tr>
  <tr>
-  <td>1000</td><td>146410</td><td>540254</td><td>3.69</td>
+  <td>1000</td><td>96395</td><td>59979</td><td>0.62</td>
  </tr>
  <tr>
-  <td>10000</td><td>1754770</td><td>6143806</td><td>3.50</td>
+  <td>10000</td><td>1341044</td><td>6098065</td><td>4.55</td>
  </tr>
  <tr>
-  <td rowspan="4">Descending</td><td>10</td><td>642</td><td>2414</td><td>3.76</td>
+  <td rowspan="4">Descending</td><td>10</td><td>180</td><td>1881</td><td>10.41</td>
  </tr>
  <tr>
-  <td>100</td><td>1747</td><td>20710</td><td>11.85</td>
+  <td>100</td><td>682</td><td>19210</td><td>28.14</td>
 </tr>
  <tr>
-  <td>1000</td><td>8053</td><td>351682</td><td>43.67</td>
+  <td>1000</td><td>3809</td><td>185185</td><td>48.61</td>
  </tr>
  <tr>
-  <td>10000</td><td>69162</td><td>5106434</td><td>73.83</td>
+  <td>10000</td><td>35878</td><td>5392428</td><td>150.30</td>
  </tr>
  <tr>
-  <td rowspan="4">Ascending</td><td>10</td><td>706</td><td>1471</td><td>2.08</td>
+  <td rowspan="4">Ascending</td><td>10</td><td>173</td><td>816</td><td>4.69</td>
  </tr>
  <tr>
-  <td>100</td><td>1712</td><td>20289</td><td>11.85</td>
+  <td>100</td><td>578</td><td>18147</td><td>31.34</td>
  </tr>
  <tr>
-  <td>1000</td><td>8498</td><td>369125</td><td>43.43</td>
+  <td>1000</td><td>2551</td><td>331993</td><td>130.12</td>
  </tr>
  <tr>
-  <td>10000</td><td>59206</td><td>5333314</td><td>90.08</td>
+  <td>10000</td><td>22098</td><td>5382446</td><td>243.57</td>
  </tr>
  <tr>
-  <td rowspan="4">Ascending + 3 Rand Exc</td> <td>10</td> <td>918</td> <td>1886</td> <td>2.05</td>
+  <td rowspan="4">Ascending + 3 Rand Exc</td><td>10</td><td>232</td><td>927</td><td>3.99</td>
  </tr>
  <tr>
-  <td>100</td> <td>3316</td> <td>21581</td> <td>6.51</td>
+  <td>100</td><td>1059</td><td>15792</td><td>14.90</td>
  </tr>
  <tr>
-  <td>1000</td> <td>11432</td> <td>380742</td> <td>33.30</td>
+  <td>1000</td><td>3525</td><td>300708</td><td>85.29</td>
  </tr>
  <tr>
-  <td>10000</td> <td>83981</td> <td>5293251</td> <td>63.03</td>
+  <td>10000</td><td>27455</td><td>4781370</td><td>174.15</td>
  </tr>
  <tr>
-  <td rowspan="4">Ascending + 10 Rand End</td><td>10</td><td>1037</td><td>2154</td><td>2.08</td>
+  <td rowspan="4">Ascending + 10 Rand End</td><td>10</td><td>378</td><td>1425</td><td>3.77</td>
  </tr>
  <tr>
-  <td>100</td><td>4779</td><td>22658</td><td>4.74</td>
+  <td>100</td><td>1707</td><td>23346</td><td>13.67</td>
  </tr>
  <tr>
-  <td>1000</td><td>16608</td><td>352633</td><td>21.23</td>
+  <td>1000</td><td>5818</td><td>334744</td><td>57.53</td>
  </tr>
  <tr>
-  <td>10000</td><td>102818</td><td>5225330</td><td>50.82</td>
+  <td>10000</td><td>38034</td><td>4985473</td><td>131.08</td>
  </tr>
  <tr>
-  <td rowspan="4">Equal Elements</td><td>10</td><td>740</td><td>1473</td><td>1.99</td>
+  <td rowspan="4">Equal Elements</td><td>10</td><td>164</td><td>766</td><td>4.68</td>
  </tr>
  <tr>
-  <td>100</td><td>1768</td><td>4576</td><td>2.59</td>
+  <td>100</td><td>520</td><td>3188</td><td>6.12</td>
  </tr>
  <tr>
-  <td>1000</td><td>6934</td><td>33676</td><td>4.86</td>
+  <td>1000</td><td>2340</td><td>27971</td><td>11.95</td>
  </tr>
  <tr>
-  <td>10000</td><td>57586</td><td>338154</td><td>5.87</td>
+  <td>10000</td><td>17011</td><td>281672</td><td>16.56</td>
  </tr>
  <tr>
-  <td rowspan="4">Many Repetitions</td><td>10</td><td>1044</td><td>2110</td><td>2.02</td>
+  <td rowspan="4">Many Repetitions</td><td>10</td><td>396</td><td>1482</td><td>3.74</td>
  </tr>
  <tr>
-  <td>100</td><td>12506</td><td>23391</td><td>1.87</td>
+  <td>100</td><td>7282</td><td>25267</td><td>3.47</td>
  </tr>
  <tr>
-  <td>1000</td><td>184184</td><td>386896</td><td>2.10</td>
+  <td>1000</td><td>105528</td><td>420120</td><td>3.98</td>
  </tr>
  <tr>
-  <td>10000</td><td>2647209</td><td>5798097</td><td>2.19</td>
+  <td>10000</td><td>1396120</td><td>5787399</td><td>4.15</td>
  </tr>
  <tr>
-  <td rowspan="4">Some Repetitions</td><td>10</td><td>1075</td><td>2183</td><td>2.03</td>
+  <td rowspan="4">Some Repetitions</td><td>10</td><td>390</td><td>1463</td><td>3.75</td>
  </tr>
  <tr>
-  <td>100</td><td>12787</td><td>23654</td><td>1.85</td>
+  <td>100</td><td>6678</td><td>20082</td><td>3.01</td>
  </tr>
  <tr>
-  <td>1000</td><td>177727</td><td>362135</td><td>2.04</td>
+  <td>1000</td><td>104344</td><td>374103</td><td>3.59</td>
  </tr>
  <tr>
-  <td>10000</td><td>2332444</td><td>5059351</td><td>2.17</td>
+  <td>10000</td><td>1333816</td><td>5474000</td><td>4.10</td>
  </tr>
 </tbody>
 </table>
 
-`TimSort.sort` **is faster** than `array.sort` on any of the tested array types. 
-In general, the more ordered the array is the better `TimSort.sort` performs with respect to `array.sort` (up to 80 times faster on already sorted arrays). 
-And also, the bigger the array the more we benefit from using 
+`TimSort.sort` **is faster** than `array.sort` on almost of the tested array types.
+In general, the more ordered the array is the better `TimSort.sort` performs with respect to `array.sort` (up to 243 times faster on already sorted arrays).
+And also, in general, the bigger the array the more we benefit from using
 the `timsort` module.  
 
 These data strongly depend on Node.js version and the machine on which the benchmark is run. I strongly encourage you to run the benchmark on your own setup with:
@@ -192,7 +197,7 @@ Please also notice that:
 -  This benchmark is far from exhaustive. Several cases are not considered 
 and the results must be taken as partial
 -  *inlining* is surely playing an active role in `timsort` module's good performance
--  A more accurate comparison of the algorithms would require implementing `array.sort` in pure javascript 
+-  A more accurate comparison of the algorithms would require implementing `array.sort` in pure javascript
 and counting element comparisons
 
 ## Stability

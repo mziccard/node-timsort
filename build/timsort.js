@@ -52,19 +52,85 @@
 
   var DEFAULT_TMP_STORAGE_LENGTH = 256;
 
+  var POWERS_OF_TEN = [1e0, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9];
+
+  function log10(x) {
+    if (x < 1e5) {
+      if (x < 1e2) {
+        return x < 1e1 ? 0 : 1;
+      }
+
+      if (x < 1e4) {
+        return x < 1e3 ? 2 : 3;
+      }
+
+      return 4;
+    }
+
+    if (x < 1e7) {
+      return x < 1e6 ? 5 : 6;
+    }
+
+    if (x < 1e9) {
+      return x < 1e8 ? 7 : 8;
+    }
+
+    return 9;
+  }
+
   function alphabeticalCompare(a, b) {
     if (a === b) {
       return 0;
-    } else {
-      var aStr = String(a);
-      var bStr = String(b);
-
-      if (aStr === bStr) {
-        return 0;
-      } else {
-        return aStr < bStr ? -1 : 1;
-      }
     }
+
+    if (~ ~a === a && ~ ~b === b) {
+      if (a === 0 || b === 0) {
+        return a < b ? -1 : 1;
+      }
+
+      if (a < 0 || b < 0) {
+        if (b >= 0) {
+          return -1;
+        }
+
+        if (a >= 0) {
+          return 1;
+        }
+
+        a = -a;
+        b = -b;
+      }
+
+      var al = log10(a);
+      var bl = log10(b);
+
+      var t = 0;
+
+      if (al < bl) {
+        a *= POWERS_OF_TEN[bl - al - 1];
+        b /= 10;
+        t = -1;
+      } else if (al > bl) {
+        b *= POWERS_OF_TEN[al - bl - 1];
+        a /= 10;
+        t = 1;
+      }
+
+      if (a === b) {
+        return t;
+      }
+
+      return a < b ? -1 : 1;
+    }
+
+    var aStr = String(a);
+    var bStr = String(b);
+
+    if (aStr === bStr) {
+      return 0;
+    }
+
+    return aStr < bStr ? -1 : 1;
   }
 
   function minRunLength(n) {
