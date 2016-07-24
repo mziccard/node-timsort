@@ -194,11 +194,6 @@ and the results must be taken as partial
 -  *inlining* is surely playing an active role in `timsort` module's good performance
 -  A more accurate comparison of the algorithms would require implementing `array.sort` in pure javascript 
 and counting element comparisons
--  `array.sort` will probably still be faster at lexicographically sorting 
-arrays of numbers. In this case, the `timsort` module inefficiently converts 
-values to strings inside the compare function and then compares the strings. 
-`array.sort`, instead, uses a smarter and faster lexicographic 
-comparison of numbers (will try to do something similar soon).
 
 ## Stability
 
